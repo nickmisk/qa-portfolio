@@ -1,0 +1,125 @@
+{
+  "info": {
+    "_postman_id": "af3521fa-fef2-4b9f-8dea-196220767739",
+    "name": "Запросы GET",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38231785",
+    "_collection_link": "https://go.postman.co/collection/38231785-af3521fa-fef2-4b9f-8dea-196220767739?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Получение списка товаров",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// этот скрипт берет рандомный ID из списка товаров и вставляет его значение в переменную productid. Удобно, чтобы в запросе на получение карточки отдельного товара не вводить ID вручную. Чтобы при выполнении запроса на получение отдельной карточки товара всякий раз возвращалась новая рандомная карточка, сначала выполняешь запрос на получение списка ВСЕХ товаров (скрипт отрабатывает), потом уже запрос на получение рандомной карточки.//\r",
+              "\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "const products = Array.isArray(response) ? response : response.products;\r",
+              "\r",
+              "if (!products || products.length === 0) {\r",
+              "    throw new Error(\"Список товаров пустой или не найден\");\r",
+              "}\r",
+              "\r",
+              "const randomProduct = products[Math.floor(Math.random() * products.length)];\r",
+              "\r",
+              "pm.collectionVariables.set(\"productid\", randomProduct.id);\r",
+              "\r",
+              "console.log(\"Random productid:\", randomProduct.id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseurl}}api/products/",
+          "host": [
+            "{{baseurl}}api"
+          ],
+          "path": [
+            "products",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получение карточки отдельного товара",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseurl}}api/products/{{productid}}",
+          "host": [
+            "{{baseurl}}api"
+          ],
+          "path": [
+            "products",
+            "{{productid}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "password",
+        "value": "iamfinallytester",
+        "type": "string"
+      },
+      {
+        "key": "username",
+        "value": "skillboxadmin",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "pm.test(\"Status code is 200\", function () {\r",
+          "    pm.response.to.have.status(200);\r",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseurl",
+      "value": "http://intershop3.skillbox.ru/"
+    },
+    {
+      "key": "productid",
+      "value": "878223"
+    }
+  ]
+}

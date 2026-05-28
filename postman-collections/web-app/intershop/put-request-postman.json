@@ -1,0 +1,103 @@
+{
+  "info": {
+    "_postman_id": "1046e45f-ff72-4d91-8728-9030bd8abf8f",
+    "name": "Запросы PUT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38231785",
+    "_collection_link": "https://go.postman.co/collection/38231785-1046e45f-ff72-4d91-8728-9030bd8abf8f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Редактирование карточки товара",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"color\": \"red\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseurl}}/api/products/879878",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "879878"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Проверка отредактированной карточки товара",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseurl}}/api/products/879878",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "879878"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "password",
+        "value": "iamfinallytester",
+        "type": "string"
+      },
+      {
+        "key": "username",
+        "value": "skillboxadmin",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseurl",
+      "value": ""
+    }
+  ]
+}

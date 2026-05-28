@@ -1,0 +1,202 @@
+{
+  "info": {
+    "_postman_id": "384fa7db-9ce2-4626-b1f2-22ea14fa7364",
+    "name": "Запросы POST",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38231785",
+    "_collection_link": "https://go.postman.co/collection/38231785-384fa7db-9ce2-4626-b1f2-22ea14fa7364?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Создание карточки товара TEMPLATE DONT TOUCH!",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.collectionVariables.set(\"productid\", jsonData.id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"name\": \"Поло мужское\",\r\n\"slug\": \"polo-for-men\",\r\n\"manage_stock\": true,\r\n\"stock_quantity\": 15,\r\n\"description\": \"For polo men\",\r\n\"price\": \"100\",\r\n\"regular_price\": \"100\",\r\n\"sale_price\": \"50\",\r\n\"images\": [\r\n{\r\n\"src\": \"https://previews.123rf.com/images/gelpi/gelpi1109/gelpi110900068/10564528-worried-fat-man-with-pink-shirt-isolated-on-white-background.jpg\"\r\n}\r\n],\r\n\"categories\": [\r\n{\r\n\"id\": 82,\r\n\"name\": \"Джинсы\",\r\n\"slug\": \"jeans\"\r\n}\r\n]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseurl}}/api/products/",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Создание карточки товара",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Этот скрипт выполняется после POST-запроса на создание карточки товара.\r",
+              "// Он берет JSON-ответ от API, достает из него поле id созданного товара\r",
+              "// и сохраняет этот id в переменную коллекции productid.\r",
+              "// \r",
+              "// Благодаря этому в следующих запросах можно не подставлять id вручную,\r",
+              "// а использовать переменную {{productid}}, например:\r",
+              "// GET {{baseurl}}/api/products/{{productid}}\r",
+              "//\r",
+              "// Цепочка:\r",
+              "// POST создал товар → скрипт сохранил его id → GET/PUT/DELETE используют {{productid}}\r",
+              "\r",
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.collectionVariables.set(\"productid\", jsonData.id);\r",
+              "\r",
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.collectionVariables.set(\"productid\", jsonData.id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"name\": \"PUT_негативный_тест_2\",\r\n\"slug\": \"negative-1\",\r\n\"manage_stock\": true,\r\n\"description\": \"Негативный тест 1\",\r\n\"price\": \"100\",\r\n\"regular_price\": \"100\",\r\n\"sale_price\": \"50\",\r\n\"images\": [\r\n{\r\n\"src\": \"https://media.istockphoto.com/id/996396804/sv/foto/test.jpg?s=2048x2048&w=is&k=20&c=_R8juj0Dnm87WhcXH6NA5xSk9L15wwv61HlTw6RJgEE=\"\r\n}\r\n],\r\n\"categories\": [\r\n{\r\n\"id\": 82,\r\n\"name\": \"Джинсы\",\r\n\"slug\": \"jeans\"\r\n}\r\n]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseurl}}/api/products/",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Проверка карточки созданного товара",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseurl}}/api/products/{{productid}}",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "{{productid}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "password",
+        "value": "iamfinallytester",
+        "type": "string"
+      },
+      {
+        "key": "username",
+        "value": "skillboxadmin",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "// Получаем JSON из ответа на POST-запрос\r",
+          "var jsonData = pm.response.json();\r",
+          "\r",
+          "// Сохраняем id созданного товара в переменную коллекции productid\r",
+          "// Потом эту переменную можно использовать в других запросах:\r",
+          "// PUT /api/products/{{productid}}\r",
+          "// DELETE /api/products/{{productid}}\r",
+          "// GET /api/products/{{productid}}\r",
+          "pm.collectionVariables.set(\"productid\", jsonData.id);"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseurl",
+      "value": "http://intershop3.skillbox.ru/"
+    },
+    {
+      "key": "productid",
+      "value": ""
+    }
+  ]
+}
