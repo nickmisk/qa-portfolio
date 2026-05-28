@@ -11,7 +11,7 @@
 Анализируемые требования сохранены в папке `evidence/`.
 
 **Источник требований:**  
-[Требования Intershop](./evidence/web-app/intershop/intershop-requirements.pdf)
+[Требования Intershop](../../../evidence/web-app/intershop/intershop-requirements.pdf)
 
 
 
